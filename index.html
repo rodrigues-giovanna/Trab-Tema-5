@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança Digital - Limpeza e Proteção de Sistemas</title>
+    <style>
+        /* CSS BÁSICO - PODE SER PERSONALIZADO PELOS ALUNOS */
+        :root {
+            --primary-color: #13a2fbcc;
+            --secondary-color: #080f6c;
+            --accent-color: #2b0abe;
+            --light-color: #13145a;
+            --dark-color: #2822c6;
+            --success-color: #2b0fe1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Menu hamburger */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #b9297d;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .faq {
+            background-color: var(--light-color);
+        }
+        
+        .faq-item {
+            background-color: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .faq-answer.active {
+            padding: 1.5rem;
+            max-height: 500px;
+        }
+        
+        .resources {
+            background-color: var(--dark-color);
+            color: white;
+        }
+        
+        .resource-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .resource-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .resource-card a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary-color);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Segurança Digital</div>
+                
+                <!-- Ícone do menu hambúrguer -->
+                <div class="menu-toggle">☰</div>
+                
+                <ul class="nav-links">
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#links">Links Úteis</a></li>
+                </ul>
+            </nav>
+            
+            <div class="hero">
+                <h1>Proteção e Limpeza de Sistemas</h1>
+                <p>Aprenda as melhores práticas para manter seu computador seguro e com desempenho otimizado</p>
+                <a href="#recursos" class="btn">Comece Agora</a>
+            </div>
+        </div>
+    </header>
+    
+    <section id="sobre">
+        <div class="container">
+            <h2 class="section-title">Sobre a Segurança Digital</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <!-- ALUNOS PODEM TROCAR A IMAGEM -->
+                    <img src="Virus.jpg" alt="Segurança Digital">
+                    <h3>Proteção Contra Ameaças</h3>
+                    <p>Mantenha seu sistema operacional, navegadores e demais softwares sempre atualizados.</p>
+                    <!-- ÁREA PARA ACRESCENTAR MAIS TEXTO -->
+                    <div class="additional-text" style="margin-top: 15px; font-style: italic; color: #666;">
+                     
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <!-- ALUNOS PODEM TROCAR A IMAGEM -->
+                    <img src="Computador.jpg" alt="Otimização">
+                    <h3>Otimização do Sistema</h3>
+                    <p>Aprenda técnicas para limpar seu computador, remover arquivos desnecessários e melhorar o desempenho.</p>
+                    <!-- ÁREA PARA ACRESCENTAR MAIS TEXTO -->
+                    <div class="additional-text" style="margin-top: 15px; font-style: italic; color: #666;">
+                        
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <!-- ALUNOS PODEM TROCAR A IMAGEM -->
+                    <img src="Backup.jpg" alt="Backup">
+                    <h3>Backup de Dados</h3>
+                    <p>A principal razão para fazer backups é proteger seus dados contra perda ou corrupção. Isso pode acontecer por diversos motivos, como falhas no hardware, ataques de vírus, erros de software ou até mesmo exclusões acidentais. 
+</p>
+                    <!-- ÁREA PARA ACRESCENTAR MAIS TEXTO -->
+                    <div class="additional-text" style="margin-top: 15px; font-style: italic; color: #666;">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="recursos" class="resources">
+        <div class="container">
+            <h2 class="section-title">Recursos Essenciais</h2>
+            <div class="resource-list">
+                <div class="resource-card">
+                    <h3>Antivírus</h3>
+                    <p>Conheça os melhores antivírus gratuitos e pagos para proteger seu dispositivo.</p>
+                    <a href="https://www.antiviruslist.com/pt/melhor-antivirus-pc/?lp=default&utm_source=google&utm_medium=cpc&sgv_medium=search&utm_campaign=22254372452&utm_content=174362268679&utm_term=melhor%20antiv%C3%ADrus%20para%20computador&cid=733586902313&pl=&feeditemid=&targetid=kwd-299587249328&mt=b&network=g&device=c&adpos=&p1=&p2=&geoid=1001575&sgv_gclid=CjwKCAjw3_PCBhA2EiwAkH_j4v_ALTm0asjXIeMzREDIAqTQAeYvNUmo67EJHVa4vlUyNdS5nYjJ3hoCpB8QAvD_BwE&wbraid=CkEKCQjwvO7CBhDuARIwAI_c3cVmjS2oxzcUb4ZfeqWdeZpXOFMSG_LZaMqlmo56Usdh_-LCVTzMhkRxFpWHGgIvuA&gad_source=1&gad_campaignid=22254372452&gbraid=0AAAAAC7AhMLC8LNvyJBdnU5rYbDCQoZ2B&gclid=CjwKCAjw3_PCBhA2EiwAkH_j4v_ALTm0asjXIeMzREDIAqTQAeYvNUmo67EJHVa4vlUyNdS5nYjJ3hoCpB8QAvD_BwE" target="_blank">Links de AntiVirus</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Ferramentas de Limpeza</h3>
+                    <p>Programas para remover arquivos temporários e otimizar seu sistema.</p>
+                    <a href="https://www.ccleaner.com/pt-br/ccleaner/download?ppc_code=012&ppc=a&om_sem_cid=hho_sem_sy%3A~pt-br_ccl_sch_brn_exc_adw_dtp&gclsrc=aw.ds&gad_source=1&gad_campaignid=19022517514&gbraid=0AAAAAD6u55VmIdK3tefC35HwHrF6eOpij&gclid=CjwKCAjw3_PCBhA2EiwAkH_j4pQHfwIuieiaD54iPQKsDHoUUzd9vA6aPQx8cwZP3v2TS3PxkSMv2hoCXDEQAvD_BwE" target="_blank">CCleaner</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Backup em Nuvem</h3>
+                    <p>Soluções seguras para armazenar seus arquivos importantes.</p>
+                    <a href="https://ipv4.google.com/intl/pt-BR/drive/download/" target="_blank">Google Drive</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Gerenciador de Senhas</h3>
+                    <p>Ferramentas para criar e armazenar senhas seguras.</p>
+                    <a href="https://bitwarden.com/" target="_blank">Bitwarden</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Com que frequência devo executar uma verificação de vírus?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Recomenda-se executar uma verificação completa de vírus pelo menos uma vez por semana. Se você navega frequentemente na internet ou baixa muitos arquivos, considere fazer verificações mais frequentes ou ativar a proteção em tempo real.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Como posso criar senhas fortes e seguras?</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p>-Combine diferentes tipos de caracteres: use letras maiúsculas, minúsculas, números e símbolos.
+
+                        -Evite informações óbvias: não utilize datas de nascimento, nomes ou sequências fáceis de adivinhar.
+-Crie senhas longas: prefira senhas com pelo menos 12 caracteres para aumentar a segurança.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h3>Os Tipos De Backup</h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Backup completo:</strong> Copia todos os arquivos selecionados. <strong>Incremental:</strong> Copia apenas arquivos alterados desde o último backup (de qualquer tipo). <strong>Diferencial:</strong> Copia arquivos alterados desde o último backup completo. O completo oferece a recuperação mais fácil, enquanto os outros economizam espaço.</p>
+                </div>
+            </div>
+            
+        
+                
+                    </h3>
+                    <span class="toggle-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                </p>
+                </div>
+            </div>
+            
+            <!-- ÁREA PARA ACRESCENTAR MAIS PERGUNTAS FAQ -->
+            
+            </div>
+        </div>
+    </section>
+    
+    <section id="links">
+        <div class="container">
+            <h2 class="section-title">Links de Apoio</h2>
+            <div class="resource-list">
+                <div class="resource-card">
+                    <h3>Guia de Segurança Digital</h3>
+                    <a href="https://www.gov.br/pt-br" target="_blank">Governo Brasileiro</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Dicas contra Malware</h3>
+                    <a href="https://www.google.com/search?q=kaspersky&oq=&gs_lcrp=EgZjaHJvbWUqCQgCEEUYOxjCAzIJCAAQRRg7GMIDMgkIARBFGDsYwgMyCQgCEEUYOxjCAzIJCAMQRRg7GMIDMgkIBBBFGDsYwgMyCQgFEEUYOxjCAzIJCAYQRRg7GMIDMgkIBxBFGDsYwgPSAQkxNjY5ajBqMTWoAgiwAgHxBRL5Xqh8tHDk&sourceid=chrome&ie=UTF-8" target="_blank">Kaspersky</a>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Tutoriais de Backup</h3>
+                    <a href="https://www.google.com/search?q=microsoft&oq=micr&gs_lcrp=EgZjaHJvbWUqDQgAEAAY4wIYsQMYgAQyDQgAEAAY4wIYsQMYgAQyEAgBEC4YxwEYsQMY0QMYgAQyBggCEEUYOTIKCAMQABixAxiABDIKCAQQABixAxiABDIKCAUQABixAxiABDIKCAYQABixAxiABDIKCAcQABixAxiABDIHCAgQABiPAjIHCAkQABiPAtIBCTI5MDFqMGoxNagCCLACAfEF1Sap2_YlSTA&sourceid=chrome&ie=UTF-8" target="_blank">Microsoft</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 Segurança Digital - Todos os direitos reservados</p>
+            <p>Landing Page educacional para treinamento em HTML, CSS e JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript para o menu móvel
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Altera o ícone dinamicamente
+            menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Fecha o menu ao clicar em um link (opcional)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.textContent = '☰';
+            });
+        });
+
+        // JavaScript para o FAQ
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('.toggle-icon');
+                
+                answer.classList.toggle('active');
+                
+                if (answer.classList.contains('active')) {
+                    icon.textContent = '-';
+                } else {
+                    icon.textContent = '+';
+                }
+            });
+        });
+
+         // Área para os alunos adicionarem mais funcionalidades JavaScript
+        console.log('Os alunos podem adicionar mais scripts aqui para personalizar a página');
+    </script>
+</body>
+</html>
